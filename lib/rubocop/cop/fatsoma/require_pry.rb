@@ -1,3 +1,4 @@
+require 'pry'
 module RuboCop
   module Cop
     module Fatsoma
@@ -11,6 +12,12 @@ module RuboCop
       #
       class RequirePry < Cop
         MSG = %q{Do not commit code which contains "require 'pry'".}
+
+        def on_send(node)
+          if [%q{require 'pry'}, %q{require "pry"}].include?(node.loc.expression.source)
+            add_offense(node, node.loc)
+          end
+        end
 
         def autocorrect(node)
 
