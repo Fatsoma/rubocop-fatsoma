@@ -19,7 +19,7 @@ module RuboCop
       class RequirePry < Cop
         MSG = 'Remove require pry when not in development.'.freeze
 
-        def_node_matcher :require_pry?, '(send nil :require (str #pry?))'
+        def_node_matcher :require_pry?, '(send nil? :require (str #pry?))'
 
         def on_send(node)
           return unless require_pry?(node)
