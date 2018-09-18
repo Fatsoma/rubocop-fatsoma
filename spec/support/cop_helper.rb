@@ -18,6 +18,7 @@ module CopHelper
   end
 
   def parse_source(source, file = nil)
+    ruby_version = RUBY_VERSION.to_f
     source = source.join($RS) if source.is_a?(Array)
 
     if file && file.respond_to?(:write)
@@ -26,7 +27,7 @@ module CopHelper
       file = file.path
     end
 
-    RuboCop::ProcessedSource.new(source, file)
+    RuboCop::ProcessedSource.new(source, ruby_version, file)
   end
 
   def autocorrect_source_file(cop, source)
