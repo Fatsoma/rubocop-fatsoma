@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'rubocop-fatsoma'
 require 'rubocop/rspec/support'
 
