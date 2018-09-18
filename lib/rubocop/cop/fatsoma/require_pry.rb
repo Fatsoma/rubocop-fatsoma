@@ -1,16 +1,23 @@
 module RuboCop
   module Cop
     module Fatsoma
-      # Check that `require 'pry'` has not been included in the commit.
+      # This cop checks for code that requires pry
       #
       # @example
-      #   # bad
+      #
+      #   # bad (ok during development)
+      #
       #   require 'pry'
+      #   do_something
+      #
+      # @example
       #
       #   # good
       #
+      #   do_something
+      #
       class RequirePry < Cop
-        MSG = %q(Do not commit code which contains "require 'pry'".).freeze
+        MSG = 'Remove require pry when not in development.'.freeze
 
         def_node_matcher :require_pry?, '(send nil :require (str #pry?))'
 

@@ -6,17 +6,19 @@ describe RuboCop::Cop::Fatsoma::RequirePry do
   let(:config) { RuboCop::Config.new }
   subject(:cop) { described_class.new(config) }
 
+  let(:message) { 'Remove require pry when not in development.' }
+
   it %q(registers an offense for "require 'pry'") do
     expect_offense(<<-RUBY.strip_indent)
       require 'pry'
-      ^^^^^^^^^^^^^ Do not commit code which contains "require 'pry'".
+      ^^^^^^^^^^^^^ #{message}
     RUBY
   end
 
   it %q(registers an offense for 'require "pry"') do
     expect_offense(<<-RUBY.strip_indent)
       require "pry"
-      ^^^^^^^^^^^^^ Do not commit code which contains "require 'pry'".
+      ^^^^^^^^^^^^^ #{message}
     RUBY
   end
 
