@@ -20,4 +20,10 @@ describe RuboCop::Cop::Fatsoma::RequirePry do
     expect(cop.messages)
       .to eq([%q(Do not commit code which contains "require 'pry'".)])
   end
+
+  it %q(does not register an offense for 'require "prime"') do
+    inspect_source(cop, 'require "prime"')
+    expect(cop.offenses).to be_empty
+    expect(cop.messages).to be_empty
+  end
 end

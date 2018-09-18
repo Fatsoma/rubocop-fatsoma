@@ -12,10 +12,16 @@ module RuboCop
       class RequirePry < Cop
         MSG = %q(Do not commit code which contains "require 'pry'".).freeze
 
+        def_node_matcher :require_pry?, '(send nil :require (str #pry?))'
+
         def on_send(node)
-          if ["require 'pry'", 'require "pry"'].include?(node.loc.expression.source)
-            add_offense(node, node.loc)
-          end
+          return unless require_pry?(node)
+
+          add_offense(node, :expression)
+        end
+
+        def pry?(node)
+          node == 'pry'
         end
 
         def autocorrect(node); end
