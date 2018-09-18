@@ -1,4 +1,4 @@
 require 'rubocop'
 
-require 'rubocop/fatsoma/version'
+require 'rubocop/fatsoma'
 require 'rubocop/cop/fatsoma/require_pry'
