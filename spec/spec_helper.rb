@@ -1,10 +1,8 @@
-# encoding: utf-8
-
 require 'rubocop-fatsoma'
-
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+require 'rubocop/rspec/support'
 
 RSpec.configure do |config|
   config.color = true
-end
 
+  config.include RuboCop::RSpec::ExpectOffense
+end
